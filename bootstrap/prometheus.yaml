@@ -14,16 +14,8 @@ spec:
     targetRevision: 39.9.0
     helm:
       value: |
-        prometheus-node-exporter:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: eks.amazonaws.com/compute-type
-                      operator: NotIn
-                      values:
-                        - fargate
+        nodeExporter:
+          enabled: false
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
