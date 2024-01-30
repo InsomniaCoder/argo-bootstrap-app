@@ -13,6 +13,8 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 39.9.0
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       allowEmpty: true
