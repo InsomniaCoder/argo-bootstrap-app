@@ -12,6 +12,18 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
     targetRevision: 39.9.0
+    helm:
+      value: |
+        prometheus-node-exporter:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: eks.amazonaws.com/compute-type
+                      operator: NotIn
+                      values:
+                        - fargate
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
