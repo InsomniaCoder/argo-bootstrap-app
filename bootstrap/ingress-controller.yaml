@@ -33,6 +33,10 @@ spec:
           metrics:
             enabled: true
             portName: http-metrics
+            serviceMonitor:
+              enabled: true
+              additionalLabels:
+                release: "prometheus"
             service:
               omitClusterIP: true
               annotations:
