@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-controller
+  namespace: argocd
+spec:
+  destination:
+    namespace: ingress-controller
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      values: |
+        controller:
+          ingressClassResource:
+            controllerValue: k8s.io/ingress-nginx
+            enabled: true
+            name: nginx
+          minAvailable: 50%
+          replicaCount: 3
+          publishService:
+            enabled: true
+          service:
+            omitClusterIP: true
+            enableHttp: true
+            enableHttps: true
+            type: NodePort
+          updateStrategy:
+            rollingUpdate:
+              maxUnavailable: 0
+            type: RollingUpdate
+          terminationGracePeriodSeconds: 200
+          metrics:
+            enabled: true
+            portName: http-metrics
+            service:
+              omitClusterIP: true
+              annotations:
+                prometheus.io/scrape: "true"
+    chart: ingress-nginx
+    repoURL: 'https://kubernetes.github.io/ingress-nginx'
+    targetRevision: 4.9.1
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
