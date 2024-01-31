@@ -13,7 +13,7 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 39.9.0
     helm:
-      value: |
+      values: |
         nodeExporter:
           enabled: false
   syncPolicy:
