@@ -24,4 +24,9 @@ spec:
       prune: true
       allowEmpty: true
       selfHeal: true
+  ignoreDifferences:
+  - group: monitoring.coreos.com
+    kind: ServiceMonitor
+    jqPathExpressions:
+    - .spec.endpoints[]?.relabelings[]?.action
   
