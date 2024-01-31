@@ -16,6 +16,18 @@ spec:
       values: |
         nodeExporter:
           enabled: false
+        prometheus:
+          additionalServiceMonitors:
+          - name: node-exporter
+            endpoints:
+            - port: metrics
+              scrapeTimeout: 10s
+            namespaceSelector:
+              matchNames:
+              - prometheus
+            selector:
+              matchLabels:
+                app.kubernetes.io/instance: prometheus-node-exporter
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
