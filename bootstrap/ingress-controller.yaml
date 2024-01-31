@@ -23,8 +23,8 @@ spec:
           service:
             omitClusterIP: true
             enableHttp: true
-            enableHttps: true
-            type: NodePort
+            enableHttps: true  
+            type: LoadBalancer
           updateStrategy:
             rollingUpdate:
               maxUnavailable: 0
