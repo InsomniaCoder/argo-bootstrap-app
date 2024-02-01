@@ -16,8 +16,14 @@ spec:
             controllerValue: k8s.io/ingress-nginx
             enabled: true
             name: nginx
-          minAvailable: 50%
-          replicaCount: 3
+          minAvailable: 10%
+          replicaCount: 10
+          autoscaling:
+            enabled: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
           publishService:
             enabled: true
           service:
@@ -30,6 +36,22 @@ spec:
               maxUnavailable: 0
             type: RollingUpdate
           terminationGracePeriodSeconds: 200
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 50
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            initialDelaySeconds: 50
+          config:
+            use-gzip: "true"
+            worker-shutdown-timeout: "10s"
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /wait-shutdown
           metrics:
             enabled: true
             portName: http-metrics
