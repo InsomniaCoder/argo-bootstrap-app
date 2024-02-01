@@ -12,6 +12,15 @@ spec:
     helm:
       values: |
         controller:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ingress
+                    operator: In
+                    values:
+                    - "true"
           ingressClassResource:
             controllerValue: k8s.io/ingress-nginx
             enabled: true
