@@ -10,7 +10,7 @@ spec:
       app: nodejs-server
   strategy:
     rollingUpdate:
-      maxSurge: 100%
+      maxSurge: 25%
       maxUnavailable: 0%
     type: RollingUpdate
   template:
@@ -24,12 +24,12 @@ spec:
         ports:
         - containerPort: 3000
         livenessProbe:
-          failureThreshold: 3
+          failureThreshold: 5
           httpGet:
             path: /health
             port: 3000
           initialDelaySeconds: 5
-          periodSeconds: 10
+          periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
         readinessProbe:
@@ -44,8 +44,11 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["sh", "-c", "sleep 20"]
+              command: ["sh", "-c", "sleep 90"]
         resources:
           limits:
+            memory: "512Mi"
+            cpu: "1"
+          requests:
             memory: "512Mi"
             cpu: "1"
