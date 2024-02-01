@@ -29,13 +29,10 @@ spec:
           replicaCount: 10
           autoscaling:
             enabled: true
-            pollingInterval: 15
-            cooldownPeriod:  30
-            minReplicaCount: 3
-            maxReplicaCount: 60
-            fallback:
-              failureThreshold: 1
-              replicas: 10
+            minReplicas: 3
+            maxReplicas: 60
+            targetCPUUtilizationPercentage: 50
+            targetMemoryUtilizationPercentage: 50
           resources:
             requests:
               cpu: 500m
