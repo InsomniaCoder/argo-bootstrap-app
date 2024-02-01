@@ -4,7 +4,7 @@ metadata:
   name: nodejs-server
   namespace: test-nodejs
 spec:
-  replicas: 100
+  replicas: 1
   selector:
     matchLabels:
       app: nodejs-server
@@ -20,9 +20,9 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: trace.risingstack.com/myapp:v1
+        image: insomniacoder/test-nodejs:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
         livenessProbe:
           failureThreshold: 3
           httpGet:
