@@ -16,11 +16,6 @@ spec:
       values: |
         extraArgs:
         - --collector.processes
-        prometheus:
-          monitor:
-            enabled: true
-            additionalLabels:
-              release: "prometheus"
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
