@@ -19,6 +19,8 @@ spec:
         prometheus:
           prometheusSpec:
             storageSpec:
+              retention: 1w
+              retentionSize: 90GiB
               volumeClaimTemplate:
                 spec:
                   storageClassName: gp2 
