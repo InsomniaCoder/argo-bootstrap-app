@@ -41,6 +41,10 @@ spec:
               matchLabels:
                 app.kubernetes.io/instance: prometheus-node-exporter
         grafana: 
+          ingress:
+            enabled: true
+            hosts:
+            - por-test-grafana.acc-poc.com
           persistence:
             type: pvc
             enabled: true
