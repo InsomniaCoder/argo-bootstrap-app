@@ -41,6 +41,7 @@ spec:
         grafana: 
           ingress:
             enabled: true
+            ingressClassName: nginx
             hosts:
             - por-test-grafana.acc-poc.com
           persistence:
