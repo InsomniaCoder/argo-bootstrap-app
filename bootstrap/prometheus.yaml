@@ -27,13 +27,6 @@ spec:
                   resources:
                     requests:
                       storage: 100Gi
-        grafana: 
-          persistence:
-            type: pvc
-            enabled: true
-            storageClassName: gp2
-            accessModes: ["ReadWriteOnce"]
-            size: 2Gi
           additionalServiceMonitors:
           - name: node-exporter
             endpoints:
@@ -45,6 +38,13 @@ spec:
             selector:
               matchLabels:
                 app.kubernetes.io/instance: prometheus-node-exporter
+        grafana: 
+          persistence:
+            type: pvc
+            enabled: true
+            storageClassName: gp2
+            accessModes: ["ReadWriteOnce"]
+            size: 10Gi
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
