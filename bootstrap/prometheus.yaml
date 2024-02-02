@@ -17,6 +17,23 @@ spec:
         nodeExporter:
           enabled: false
         prometheus:
+          prometheusSpec:
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: gp2 
+                  accessModes:
+                    - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: 100Gi
+        grafana: 
+          persistence:
+            type: pvc
+            enabled: true
+            storageClassName: gp2
+            accessModes: ["ReadWriteOnce"]
+            size: 2Gi
           additionalServiceMonitors:
           - name: node-exporter
             endpoints:
